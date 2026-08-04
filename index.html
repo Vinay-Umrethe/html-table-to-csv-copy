@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML Table To CSV - Demo</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css">
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      color: #222;
+      line-height: 1.5;
+    }
+
+    h1,
+    h3,
+    h4 {
+      margin: 0 0 0.5rem;
+      color: #333;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+
+    .paste-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .paste-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    textarea,
+    .rich-paste {
+      width: 100%;
+      height: 350px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    textarea {
+      font-family: monospace;
+      font-size: 0.9rem;
+      resize: vertical;
+    }
+
+    .rich-paste:empty::before {
+      content: attr(data-placeholder);
+      color: #888;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    a {
+      text-decoration-skip-ink: auto;
+      text-underline-offset: 4px;
+    }
+
+    footer a {
+      color: #555;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <h1 style="text-align: center;">HTML Table To CSV Copier Extension Demo</h1>
+  <p style="margin-top: -0.25rem; text-align: center;">
+    <a href="https://github.com/Vinay-Umrethe/html-table-to-csv-copy" target="_blank" rel="noopener noreferrer">
+      <img src="https://img.shields.io/badge/GitHub-View_Project-181717?logo=github&style=for-the-badge"
+        alt="View on GitHub">
+    </a>
+  </p>
+
+  <h2>Sample Table</h2>
+  <p>
+    Highlight any part of the table below and press <strong>Ctrl+C / Cmd+C</strong> and paste it into
+    the box below or Excel to test CSV formatting.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Course & Code</th>
+        <th>Syllabus / Topics Covered</th>
+        <th>Schedules & Prerequisites</th>
+        <th>Grading Weight Formula (KaTeX)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <strong>Introductory Physics</strong><br>
+          <em>PHYS-101</em>
+        </td>
+        <td>
+          <ul>
+            <li>Classical Mechanics & motion</li>
+            <li>Wave mechanics & acoustics</li>
+            <li>Thermodynamics principles</li>
+          </ul>
+        </td>
+        <td>
+          "Prerequisite: Calculus I" is recommended.<br>
+          Lectures held in Hall A, Room 302.
+        </td>
+        <td class="math-cell" data-formula="G = 0.4 \cdot E_{mid} + 0.6 \cdot E_{final}"></td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Statistical Methods</strong><br>
+          <em>STAT-250</em>
+        </td>
+        <td>
+          <ul>
+            <li>Probability distributions</li>
+            <li>Hypothesis testing</li>
+            <li>Regression analysis</li>
+          </ul>
+        </td>
+        <td>
+          "Lab fee: $45" applies.<br>
+          Requires statistical calculator.
+        </td>
+        <td class="math-cell" data-formula="\mu = \frac{1}{N} \sum_{i=1}^{N} X_i"></td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Quantum Mechanics</strong><br>
+          <em>PHYS-401</em>
+        </td>
+        <td>
+          <ol>
+            <li>Schrödinger wave equation</li>
+            <li>Angular momentum & spin</li>
+            <li>Perturbation theory</li>
+          </ol>
+        </td>
+        <td>
+          "Prerequisite: PHYS-202 & MATH-305".<br>
+          Offered Spring semester only.
+        </td>
+        <td class="math-cell" data-formula="i\hbar\frac{\partial}{\partial t}\Psi = \hat{H}\Psi"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Testing section -->
+  <h3>Paste the table to test</h3>
+  <p>Copy the table above, then click inside either box below and paste <strong>(Ctrl+V / Cmd+V)</strong> to see the
+    result.</p>
+  <div class="paste-grid">
+    <div>
+      <h4>1. Plain Text / CSV Output</h4>
+      <textarea placeholder="Paste (Ctrl+V / Cmd+V) here to test plain CSV output."></textarea>
+    </div>
+    <div>
+      <h4>2. Rich Text / HTML Output</h4>
+      <div class="rich-paste" contenteditable="true"
+        data-placeholder="Paste (Ctrl+V / Cmd+V) here to test rendered HTML table output."></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Copyright &copy;
+      <script>document.write(new Date().getFullYear())</script> <a href="https://github.com/Vinay-Umrethe"
+        target="_blank" rel="noopener noreferrer">Vinay Umrethe</a>
+      <a href="mailto:umrethevinay@gmail.com">umrethevinay@gmail.com</a><br>
+      <a href="https://opensource.org/licenses/MIT">MIT License</a>
+    </p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js"></script>
+  <script>
+    document.querySelectorAll(".math-cell").forEach(el => {
+      katex.render(el.dataset.formula, el, { throwOnError: false });
+    });
+  </script>
+  <script src="./table-copy-csv.js"></script>
+
+</body>
+
+</html>
