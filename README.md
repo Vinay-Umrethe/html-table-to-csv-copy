@@ -28,7 +28,7 @@ Place it before closing `</body>` tag and use from `public/scripts/` folder of y
 
 ## Demo
 
-Open [`index.html`](index.html) in any browser to test the script.
+Open [`index.html`](index.html) in any browser to test the script. Or visit [Live preview](https://html-table-to-csv-copy.netlify.app/).
 
 ## License
 
